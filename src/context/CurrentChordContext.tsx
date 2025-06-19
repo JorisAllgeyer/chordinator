@@ -8,7 +8,7 @@ type CurrentChord = {
 
 type CurrentChordContextType = {
   currentChord: CurrentChord;
-  setCurrentChord: (chord: CurrentChord) => void;
+  setCurrentChord: React.Dispatch<React.SetStateAction<CurrentChord>>;
 };
 
 const CurrentChordContext = createContext<CurrentChordContextType | undefined>(

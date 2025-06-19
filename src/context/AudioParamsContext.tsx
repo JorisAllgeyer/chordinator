@@ -3,7 +3,7 @@ import { DEFAULT_AUDIO_PARAMS, type AudioParams } from "../lib/audio";
 
 const AudioParamsContext = createContext<{
   audioParams: AudioParams;
-  setAudioParams: (audioParams: AudioParams) => void;
+  setAudioParams: React.Dispatch<React.SetStateAction<AudioParams>>;
 }>({
   audioParams: DEFAULT_AUDIO_PARAMS,
   setAudioParams: () => {},

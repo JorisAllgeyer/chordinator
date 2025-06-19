@@ -3,26 +3,26 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #1a1a1a;
 }
 
 .screen {
-  background-color: #1a1a1a;
   color: #67bf87;
   font-family: "VT323", monospace;
   font-weight: 400;
   font-style: normal;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 25px;
+  overflow-x: auto;
 }
 
 .container {
   border-top: 2px solid #67bf87;
   border-left: 2px solid #67bf87;
   border-right: 2px solid #67bf87;
-  width: 668px;
+  width: clamp(480px, 100%, 668px);
 }
 
 .screen-section {
@@ -40,7 +40,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
 }
 
 .divider {
@@ -83,7 +83,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .kb-row {
   display: flex;
-  line-height: 32px;
+  line-height: 28px;
   height: 32px;
 }
 
@@ -97,7 +97,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .kb-cell.first {
-  width: 48px;
+  width: 42px;
+  text-align: left;
 }
 
 .keybutton {
@@ -107,6 +108,13 @@ input[type="range"]::-webkit-slider-thumb {
   height: 28px;
 }
 
-.keybutton.selected {
+.bordered {
+  border: 2px solid #67bf87;
+  background-color: #1a1a1a;
+  background: #1a1a1a;
+}
+
+.selected {
   background-color: #67bf87;
+  color: #1a1a1a;
 }

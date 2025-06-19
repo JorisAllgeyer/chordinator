@@ -3,7 +3,7 @@ import {
   getChordFromKeys,
   getNoteFromKeyPressed,
 } from "../lib/keyboard-bindings";
-import { useNoteOrder } from "../context/NoteOrderContext";
+import { useChordLayout } from "../context/ChordLayoutContext";
 import { NOTES_NATURAL, NOTES_CYCLE_OF_FIFTHS } from "../lib/notes";
 import { usePlayChord } from "../hooks/usePlayChord";
 import { useAudioParams } from "../context/AudioParamsContext";
@@ -12,14 +12,14 @@ import { useKeyboardInterface } from "../context/KeyboardInterfaceContext";
 
 export default function KeyboardListener() {
   const { audioParams } = useAudioParams();
-  const { order } = useNoteOrder();
+  const { chordLayout } = useChordLayout();
   const { keyboardInterface } = useKeyboardInterface();
 
   const { startChord, stopChord } = usePlayChord();
   const { startNote, stopNote } = usePlayNote();
 
   const notesContext =
-    order === "natural" ? NOTES_NATURAL : NOTES_CYCLE_OF_FIFTHS;
+    chordLayout === "natural" ? NOTES_NATURAL : NOTES_CYCLE_OF_FIFTHS;
 
   // Pour éviter de rejouer le même accord si la touche est maintenue
   const activeKeysRef = useRef<Set<string>>(new Set());
@@ -42,20 +42,19 @@ export default function KeyboardListener() {
         }
       } else {
         const note = getNoteFromKeyPressed(event);
-        if (note) {
-          startNote(note);
-        }
+        if (note) startNote(note);
       }
     };
 
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (activeKeysRef.current.has(e.key)) {
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (activeKeysRef.current.has(event.key)) {
         if (keyboardInterface === "autoChord") {
           stopChord();
         } else {
-          stopNote();
+          const note = getNoteFromKeyPressed(event);
+          if (note) stopNote(note);
         }
-        activeKeysRef.current.delete(e.key);
+        activeKeysRef.current.delete(event.key);
       }
     };
 

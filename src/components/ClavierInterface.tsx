@@ -3,7 +3,7 @@ import NotePlayer from "./NotePlayer";
 
 export default function ClavierInterface() {
   return (
-    <>
+    <div className="kb-container">
       <div className="kb-row">
         <div className="kb-cell first"></div>
         {WHITE_KEYS.map((note) => (
@@ -33,6 +33,6 @@ export default function ClavierInterface() {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

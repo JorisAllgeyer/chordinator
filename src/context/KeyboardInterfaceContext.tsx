@@ -4,7 +4,7 @@ export type KeyboardInterface = "autoChord" | "clavier";
 
 const KeyboardInterfaceContext = createContext<{
   keyboardInterface: KeyboardInterface;
-  setKeyboardInterface: (keyboardInterface: KeyboardInterface) => void;
+  setKeyboardInterface: React.Dispatch<React.SetStateAction<KeyboardInterface>>;
 }>({
   keyboardInterface: "autoChord",
   setKeyboardInterface: () => {},

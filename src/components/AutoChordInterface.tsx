@@ -1,11 +1,12 @@
 import ChordPlayer from "./ChordPlayer";
 
-import { useNoteOrder } from "../context/NoteOrderContext";
+import { useChordLayout } from "../context/ChordLayoutContext";
 import { NOTES_NATURAL, NOTES_CYCLE_OF_FIFTHS } from "../lib/notes";
 
 export default function AutoChordInterface() {
-  const { order } = useNoteOrder();
-  const notes = order === "natural" ? NOTES_NATURAL : NOTES_CYCLE_OF_FIFTHS;
+  const { chordLayout } = useChordLayout();
+  const notes =
+    chordLayout === "natural" ? NOTES_NATURAL : NOTES_CYCLE_OF_FIFTHS;
 
   return (
     <div className="kb-container">
@@ -17,7 +18,6 @@ export default function AutoChordInterface() {
       </div>
       <div className="kb-row">
         <div className="kb-cell first">Maj</div>
-
         {notes.map((note) => (
           <div className="kb-cell">
             <ChordPlayer root={note} type="maj" />

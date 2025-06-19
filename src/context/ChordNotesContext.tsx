@@ -2,7 +2,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 
 type ChordNotesContextType = {
   notes: string[];
-  setNotes: (notes: string[]) => void;
+  setNotes: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 const ChordNotesContext = createContext<ChordNotesContextType | undefined>(

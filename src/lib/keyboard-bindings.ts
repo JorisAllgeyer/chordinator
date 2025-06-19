@@ -4,7 +4,7 @@ import { NOTES_NATURAL } from "./notes";
 /**
  * Default key bindings for a MacBook keyboard in autochord mode
  */
-const CHORDS_KEY_BINDINGS: Record<"maj" | "min" | "7", string[]> = {
+export const CHORDS_KEY_BINDINGS: Record<"maj" | "min" | "7", string[]> = {
   maj: ["&", "é", '"', "'", "(", "§", "è", "!", "ç", "à", ")", "-"],
   min: ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "^", "$"],
   "7": ["q", "s", "d", "f", "g", "h", "j", "k", "l", "m", "ù", "`"],
@@ -26,7 +26,7 @@ const COMBINATION_TO_CHORD_TYPE: Record<string, ChordType> = {
 /**
  * Default key bindings for a MacBook keyboard in clavier mode
  */
-const NOTES_KEY_BINDINGS = [
+export const NOTES_KEY_BINDINGS = [
   "<",
   "q",
   "w",

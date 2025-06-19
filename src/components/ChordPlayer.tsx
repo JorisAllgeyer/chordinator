@@ -1,8 +1,14 @@
 import { usePlayChord } from "../hooks/usePlayChord";
 import { useCurrentChord } from "../context/CurrentChordContext";
-import type { ChordType } from "../lib/chords";
+import type { BaseChordType, ChordType } from "../lib/chords";
+import { useShowKbBindings } from "../context/ShowKbBindingsContext";
+import { useChordLayout } from "../context/ChordLayoutContext";
+import { NOTES_CYCLE_OF_FIFTHS, NOTES_NATURAL } from "../lib/notes";
+import { CHORDS_KEY_BINDINGS } from "../lib/keyboard-bindings";
 
 export default function ChordPlayer({ root, type }: ChordPlayerProps) {
+  const { showKbBindings } = useShowKbBindings();
+  const { chordLayout } = useChordLayout();
   const { startChord, stopChord } = usePlayChord();
   const { currentChord } = useCurrentChord();
 
@@ -26,19 +32,24 @@ export default function ChordPlayer({ root, type }: ChordPlayerProps) {
     (currentChord?.chordType === type ||
       getBaseTypes(currentChord.chordType).includes(type));
 
+  const notes =
+    chordLayout === "natural" ? NOTES_NATURAL : NOTES_CYCLE_OF_FIFTHS;
+  const noteIndex = notes.indexOf(root);
+  const kbBinding = CHORDS_KEY_BINDINGS[type][noteIndex];
+
   return (
     <button
       onMouseDown={() => startChord(root, type)}
       onMouseUp={stopChord}
       onMouseLeave={stopChord}
-      className={isActive ? "keybutton selected" : "keybutton"}
+      className={`keybutton${isActive ? " selected" : ""}`}
     >
-      &nbsp;
+      {showKbBindings ? kbBinding : undefined}
     </button>
   );
 }
 
 type ChordPlayerProps = {
   root: string;
-  type: ChordType;
+  type: BaseChordType;
 };
